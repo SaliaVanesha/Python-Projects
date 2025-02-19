@@ -1,0 +1,36 @@
+import tkinter as tk
+import random 
+
+fact = ["BrightChamp teaches coding for beginner", "BrightChamp uses replit as coding platform", "BrightChamp has many coding teachers"] 
+
+app = tk.Tk()
+app.title("Facts about BrightChamp")
+app.geometry("400x300")
+app.config(bg="pink")
+
+def random_fact():
+  random_fact = random.choice(fact)
+  label.config(text=random_fact)
+
+def addfact():
+  newfact = entry.get()
+  fact.append(newfact)
+  label.config(text=newfact)
+  entry.delete(0, tk.END)
+
+
+label = tk.Label(app, text="", fg="purple", font=("helvetica", 14, "bold"), bg="#e6e6e6", wraplength=300)
+
+factbutton = tk.Button(app, text="Show Fact", bg="purple", fg="white", font=("helvetica",12), command=random_fact)
+
+entry = tk.Entry(app, font=("helvetica", 12))
+
+addbutton = tk.Button(app, text="Add Fact", bg="#008cca", fg="white", command=addfact, font=("helvetica", 12))
+
+label.pack(pady=20)
+factbutton.pack(pady=10)
+
+entry.pack(pady=10)
+addbutton.pack(pady=10)
+
+app.mainloop()
