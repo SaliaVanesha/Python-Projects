@@ -1,0 +1,27 @@
+import math
+
+# Function to calculate resultant force
+def calculate_resultant(forces):
+    sum_x = sum([force["magnitude"] * math.cos(math.radians(force["angle"])) for force in forces])
+    sum_y = sum([force["magnitude"] * math.sin(math.radians(force["angle"])) for force in forces])
+    
+    resultant_magnitude = math.sqrt(sum_x**2 + sum_y**2)
+    resultant_angle = math.degrees(math.atan2(sum_y, sum_x))
+    
+    return resultant_magnitude, resultant_angle
+
+# Input forces (magnitude and angle)
+number_of_forces = int(input("Enter the number of forces: "))
+forces = []
+
+for i in range(number_of_forces):
+    magnitude = float(input(f"Enter the magnitude of force {i+1} (N): "))
+    angle = float(input(f"Enter the angle of force {i+1} (degrees): "))
+    forces.append({"magnitude": magnitude, "angle": angle})
+
+# Calculate resultant force
+resultant_magnitude, resultant_angle = calculate_resultant(forces)
+
+# Display results
+print(f"\nResultant Force Magnitude: {resultant_magnitude:.2f} N")
+print(f"Resultant Force Angle: {resultant_angle:.2f} degrees")
