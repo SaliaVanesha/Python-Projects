@@ -1,0 +1,36 @@
+class LogicalTreeNode:
+    def __init__(self, value):
+        self.value = value  # Logical operator or operand
+        self.left = None    # Left child
+        self.right = None   # Right child
+
+# Recursive function to print the tree
+def print_tree(node, level=0):
+    if node is not None:
+        print_tree(node.right, level + 1)  # Print right child
+        print('    ' * level + str(node.value))  # Print current node
+        print_tree(node.left, level + 1)  # Print left child
+
+# Example of logical tree construction
+def build_example_tree():
+    # Root node (Logical operator "AND")
+    root = LogicalTreeNode("AND")
+    
+    # Left subtree
+    root.left = LogicalTreeNode("OR")
+    root.left.left = LogicalTreeNode("A")
+    root.left.right = LogicalTreeNode("B")
+    
+    # Right subtree
+    root.right = LogicalTreeNode("NOT")
+    root.right.right = LogicalTreeNode("C")
+    
+    return root
+
+# Main program
+print("Logical Tree Example")
+print("====================")
+
+# Build and print the example logical tree
+logical_tree = build_example_tree()
+print_tree(logical_tree)
