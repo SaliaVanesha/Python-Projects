@@ -1,0 +1,52 @@
+from matplotlib_venn import venn2, venn3
+import matplotlib.pyplot as plt
+
+def venn_two_sets():
+    print("\nTwo-Set Venn Diagram")
+    # Input logic for two sets
+    A = int(input("Enter the size of Set A: "))
+    B = int(input("Enter the size of Set B: "))
+    A_and_B = int(input("Enter the size of the intersection of Set A and Set B (A ∩ B): "))
+    A_only = A - A_and_B  # Elements only in A
+    B_only = B - A_and_B  # Elements only in B
+    
+    venn2(subsets=(A_only, B_only, A_and_B), set_labels=('Set A', 'Set B'))
+    plt.title("Two-Set Venn Diagram")
+    plt.show()
+
+def venn_three_sets():
+    print("\nThree-Set Venn Diagram")
+    # Input logic for three sets
+    A = int(input("Enter the size of Set A: "))
+    B = int(input("Enter the size of Set B: "))
+    C = int(input("Enter the size of Set C: "))
+    A_and_B = int(input("Enter the size of the intersection of Set A and Set B (A ∩ B): "))
+    A_and_C = int(input("Enter the size of the intersection of Set A and Set C (A ∩ C): "))
+    B_and_C = int(input("Enter the size of the intersection of Set B and Set C (B ∩ C): "))
+    A_and_B_and_C = int(input("Enter the size of the intersection of all three sets (A ∩ B ∩ C): "))
+    
+    # Calculate only-in regions
+    A_only = A - (A_and_B + A_and_C - A_and_B_and_C)
+    B_only = B - (A_and_B + B_and_C - A_and_B_and_C)
+    C_only = C - (A_and_C + B_and_C - A_and_B_and_C)
+    AB_only = A_and_B - A_and_B_and_C
+    AC_only = A_and_C - A_and_B_and_C
+    BC_only = B_and_C - A_and_B_and_C
+
+    venn3(subsets=(A_only, B_only, C_only, AB_only, AC_only, BC_only, A_and_B_and_C), 
+          set_labels=('Set A', 'Set B', 'Set C'))
+    plt.title("Three-Set Venn Diagram")
+    plt.show()
+
+# Main Menu
+print("Logical Venn Diagrams")
+print("1. Two-Set Venn Diagram")
+print("2. Three-Set Venn Diagram")
+choice = int(input("Enter your choice (1 or 2): "))
+
+if choice == 1:
+    venn_two_sets()
+elif choice == 2:
+    venn_three_sets()
+else:
+    print("Invalid choice. Please restart the program.")
