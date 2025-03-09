@@ -1,0 +1,12 @@
+# Force Calculator
+def calculate_force(mass, acceleration):
+    force = mass * acceleration
+    return force
+
+# Input values
+mass = float(input("Enter mass (kg): "))
+acceleration = float(input("Enter acceleration (m/s^2): "))
+
+# Calculate and display force
+force = calculate_force(mass, acceleration)
+print(f"The force is {force} Newtons.")
