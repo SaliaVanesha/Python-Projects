@@ -1,0 +1,52 @@
+# Compound Statements
+def evaluate_compound_statements():
+    print("\nLogical Operators: AND, OR, NOT")
+    
+    # Input statements
+    statement1 = input("Enter the first statement (True/False): ").strip().capitalize()
+    statement2 = input("Enter the second statement (True/False): ").strip().capitalize()
+    operator = input("Enter the logical operator (AND/OR/NOT): ").strip().upper()
+    
+    # Convert to boolean
+    statement1 = True if statement1 == "True" else False
+    statement2 = True if statement2 == "True" else False
+    
+    # Perform logical operation
+    if operator == "AND":
+        result = statement1 and statement2
+    elif operator == "OR":
+        result = statement1 or statement2
+    elif operator == "NOT":
+        result = not statement1  # NOT only applies to the first statement
+    else:
+        result = "Invalid operator"
+    
+    print(f"Result of {operator}: {result}")
+
+
+# Quantitative Logic (Universal and Existential Quantifiers)
+def evaluate_quantitative_logic():
+    print("\nQuantifiers: FOR ALL, EXISTS")
+    domain = list(map(int, input("Enter the domain (comma-separated, e.g., 1, 2, 3): ").split(',')))
+    statement = input("Enter the condition (e.g., x > 0 for 'all positive'): ")
+    
+    # Parse domain and evaluate condition
+    all_satisfy = all(eval(statement.replace("x", str(x))) for x in domain)  # Universal quantifier
+    some_satisfy = any(eval(statement.replace("x", str(x))) for x in domain)  # Existential quantifier
+    
+    print(f"All satisfy condition ('FOR ALL'): {all_satisfy}")
+    print(f"Some satisfy condition ('EXISTS'): {some_satisfy}")
+
+
+# Main Menu
+print("Choose a logic type:")
+print("1. Compound Statements")
+print("2. Quantitative Statements")
+choice = int(input("Enter your choice (1 or 2): "))
+
+if choice == 1:
+    evaluate_compound_statements()
+elif choice == 2:
+    evaluate_quantitative_logic()
+else:
+    print("Invalid choice. Please restart the program.")
