@@ -1,0 +1,64 @@
+import numpy as np
+
+# Function to add vectors
+def add_vectors(vec1, vec2):
+    return np.add(vec1, vec2)
+
+# Function to subtract vectors
+def subtract_vectors(vec1, vec2):
+    return np.subtract(vec1, vec2)
+
+# Function to calculate dot product of two vectors
+def dot_product(vec1, vec2):
+    return np.dot(vec1, vec2)
+
+# Function to calculate cross product of two vectors
+def cross_product(vec1, vec2):
+    return np.cross(vec1, vec2)
+
+# Function to calculate magnitude of a vector
+def magnitude(vec):
+    return np.linalg.norm(vec)
+
+# Main Program
+print("Choose an operation:")
+print("1. Add Vectors")
+print("2. Subtract Vectors")
+print("3. Dot Product")
+print("4. Cross Product (3D vectors only)")
+print("5. Magnitude of a Vector")
+
+choice = int(input("Enter your choice (1-5): "))
+
+if choice in [1, 2, 3, 4, 5]:
+    if choice in [1, 2, 3, 4]:
+        # Input two vectors
+        vec1 = list(map(float, input("Enter the first vector (comma-separated, e.g., 1,2,3): ").split(',')))
+        vec2 = list(map(float, input("Enter the second vector (comma-separated, e.g., 4,5,6): ").split(',')))
+        vec1 = np.array(vec1)
+        vec2 = np.array(vec2)
+        
+        # Perform operations
+        if choice == 1:
+            result = add_vectors(vec1, vec2)
+            print(f"Result of vector addition: {result}")
+        elif choice == 2:
+            result = subtract_vectors(vec1, vec2)
+            print(f"Result of vector subtraction: {result}")
+        elif choice == 3:
+            result = dot_product(vec1, vec2)
+            print(f"Dot product: {result}")
+        elif choice == 4:
+            if len(vec1) == 3 and len(vec2) == 3:
+                result = cross_product(vec1, vec2)
+                print(f"Cross product: {result}")
+            else:
+                print("Cross product is only defined for 3D vectors.")
+    elif choice == 5:
+        # Input one vector for magnitude
+        vec = list(map(float, input("Enter the vector (comma-separated, e.g., 3,4,5): ").split(',')))
+        vec = np.array(vec)
+        result = magnitude(vec)
+        print(f"Magnitude of the vector: {result}")
+else:
+    print("Invalid choice. Please restart the program.")
