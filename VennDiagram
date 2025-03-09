@@ -1,0 +1,45 @@
+from matplotlib_venn import venn2, venn3
+import matplotlib.pyplot as plt
+
+def two_set_venn():
+    # Input sizes of sets
+    set1_size = int(input("Enter the size of Set 1: "))
+    set2_size = int(input("Enter the size of Set 2: "))
+    intersection_size = int(input("Enter the size of the intersection: "))
+
+    # Create the Venn diagram
+    venn = venn2(subsets=(set1_size, set2_size, intersection_size), set_labels=('Set 1', 'Set 2'))
+
+    # Show the diagram
+    plt.title("Two-Set Venn Diagram")
+    plt.show()
+
+def three_set_venn():
+    # Input sizes of sets
+    set1_size = int(input("Enter the size of Set 1: "))
+    set2_size = int(input("Enter the size of Set 2: "))
+    set3_size = int(input("Enter the size of Set 3: "))
+    intersection_12 = int(input("Enter the size of the intersection of Set 1 and Set 2: "))
+    intersection_13 = int(input("Enter the size of the intersection of Set 1 and Set 3: "))
+    intersection_23 = int(input("Enter the size of the intersection of Set 2 and Set 3: "))
+    intersection_123 = int(input("Enter the size of the intersection of all three sets: "))
+
+    # Create the Venn diagram
+    venn = venn3(subsets=(set1_size, set2_size, set3_size, 
+                          intersection_12, intersection_13, intersection_23, intersection_123), 
+                 set_labels=('Set 1', 'Set 2', 'Set 3'))
+
+    # Show the diagram
+    plt.title("Three-Set Venn Diagram")
+    plt.show()
+
+# Main menu to choose Venn diagram type
+print("Choose the type of Venn Diagram:\n1. Two-Set Venn Diagram\n2. Three-Set Venn Diagram")
+choice = int(input("Enter your choice (1 or 2): "))
+
+if choice == 1:
+    two_set_venn()
+elif choice == 2:
+    three_set_venn()
+else:
+    print("Invalid choice. Please restart the program.")
