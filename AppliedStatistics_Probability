@@ -1,0 +1,74 @@
+import numpy as np
+import scipy.stats as stats
+import matplotlib.pyplot as plt
+
+# Function for Descriptive Statistics
+def descriptive_statistics(data):
+    mean = np.mean(data)
+    median = np.median(data)
+    mode = stats.mode(data).mode[0]
+    std_dev = np.std(data, ddof=1)
+    variance = np.var(data, ddof=1)
+    minimum = np.min(data)
+    maximum = np.max(data)
+    return mean, median, mode, std_dev, variance, minimum, maximum
+
+# Function for Probability Distributions (Normal Distribution)
+def normal_distribution(mu, sigma):
+    x = np.linspace(mu - 4*sigma, mu + 4*sigma, 1000)
+    pdf = stats.norm.pdf(x, mu, sigma)
+    cdf = stats.norm.cdf(x, mu, sigma)
+
+    # Plot the PDF and CDF
+    plt.figure(figsize=(10, 6))
+    plt.plot(x, pdf, label="PDF (Probability Density Function)", color="blue")
+    plt.plot(x, cdf, label="CDF (Cumulative Distribution Function)", color="red")
+    plt.title("Normal Distribution")
+    plt.xlabel("X")
+    plt.ylabel("Probability")
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+# Function for Hypothesis Testing (One-Sample t-Test)
+def one_sample_t_test(data, population_mean):
+    t_stat, p_value = stats.ttest_1samp(data, population_mean)
+    return t_stat, p_value
+
+# Main Program
+print("Choose an option:")
+print("1. Descriptive Statistics")
+print("2. Normal Distribution Visualization")
+print("3. One-Sample t-Test")
+choice = int(input("Enter your choice (1, 2, or 3): "))
+
+if choice == 1:
+    # Descriptive Statistics
+    data = list(map(float, input("Enter the data points separated by commas (e.g., 5,10,15): ").split(',')))
+    mean, median, mode, std_dev, variance, minimum, maximum = descriptive_statistics(data)
+    print(f"\nDescriptive Statistics:")
+    print(f"Mean: {mean}")
+    print(f"Median: {median}")
+    print(f"Mode: {mode}")
+    print(f"Standard Deviation: {std_dev}")
+    print(f"Variance: {variance}")
+    print(f"Minimum: {minimum}")
+    print(f"Maximum: {maximum}")
+
+elif choice == 2:
+    # Normal Distribution Visualization
+    mu = float(input("Enter the mean (mu): "))
+    sigma = float(input("Enter the standard deviation (sigma): "))
+    normal_distribution(mu, sigma)
+
+elif choice == 3:
+    # One-Sample t-Test
+    data = list(map(float, input("Enter the data points separated by commas (e.g., 5,10,15): ").split(',')))
+    population_mean = float(input("Enter the population mean: "))
+    t_stat, p_value = one_sample_t_test(data, population_mean)
+    print(f"\nOne-Sample t-Test:")
+    print(f"T-Statistic: {t_stat}")
+    print(f"P-Value: {p_value}")
+
+else:
+    print("Invalid choice. Please restart the program.")
