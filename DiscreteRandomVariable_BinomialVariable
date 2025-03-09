@@ -1,0 +1,58 @@
+import math
+
+# Function to calculate expected value and variance of a discrete random variable
+def discrete_random_variable(values, probabilities):
+    expected_value = sum([values[i] * probabilities[i] for i in range(len(values))])
+    variance = sum([(values[i]**2) * probabilities[i] for i in range(len(values))]) - expected_value**2
+    return expected_value, variance
+
+# Function to calculate binomial probability
+def binomial_probability(n, p, k):
+    binomial_coeff = math.comb(n, k)  # nCk
+    probability = binomial_coeff * (p**k) * ((1 - p)**(n - k))
+    return probability
+
+# Function to calculate expected value and variance of a binomial variable
+def binomial_statistics(n, p):
+    expected_value = n * p
+    variance = n * p * (1 - p)
+    return expected_value, variance
+
+# Main program
+print("Choose an option:\n1. Discrete Random Variable\n2. Binomial Variable")
+choice = int(input("Enter your choice (1 or 2): "))
+
+if choice == 1:
+    # Discrete Random Variable
+    num_values = int(input("Enter the number of values: "))
+    values = []
+    probabilities = []
+    for i in range(num_values):
+        val = float(input(f"Enter value {i + 1}: "))
+        prob = float(input(f"Enter probability for value {i + 1}: "))
+        values.append(val)
+        probabilities.append(prob)
+    if sum(probabilities) != 1:
+        print("Error: Probabilities must sum to 1.")
+    else:
+        expected_value, variance = discrete_random_variable(values, probabilities)
+        print(f"Expected Value: {expected_value}")
+        print(f"Variance: {variance}")
+
+elif choice == 2:
+    # Binomial Variable
+    n = int(input("Enter the number of trials (n): "))
+    p = float(input("Enter the probability of success (p): "))
+    k = int(input("Enter the number of successes (k): "))
+    
+    # Binomial Probability
+    prob = binomial_probability(n, p, k)
+    print(f"Probability of exactly {k} successes: {prob}")
+
+    # Expected Value and Variance
+    expected_value, variance = binomial_statistics(n, p)
+    print(f"Expected Value: {expected_value}")
+    print(f"Variance: {variance}")
+
+else:
+    print("Invalid choice. Please restart the program.")
