@@ -1,0 +1,50 @@
+# Function to evaluate a single logical statement
+def single_statement():
+    print("\nEvaluate a Single Logical Statement")
+    # Input the statement
+    statement = input("Enter a logical statement (e.g., 'True AND False'): ").strip().upper()
+
+    # Parse and evaluate the statement
+    try:
+        # Replace logical words with Python operators
+        statement = statement.replace("AND", "and").replace("OR", "or").replace("NOT", "not")
+        result = eval(statement)
+        print(f"Result: {result}")
+    except Exception as e:
+        print(f"Error: {e}")
+
+# Function to evaluate compound logical statements
+def compound_statements():
+    print("\nEvaluate Compound Logical Statements")
+    # Input multiple conditions
+    print("Enter conditions (as 'True' or 'False') for A, B, and C:")
+    A = input("Condition A (True/False): ").strip().capitalize() == "True"
+    B = input("Condition B (True/False): ").strip().capitalize() == "True"
+    C = input("Condition C (True/False): ").strip().capitalize() == "True"
+
+    # Input a logical expression
+    expression = input("Enter a logical expression using A, B, C (e.g., 'A AND (B OR NOT C)'): ").strip().upper()
+
+    # Parse and evaluate the expression
+    try:
+        # Replace logical words with Python operators
+        expression = expression.replace("AND", "and").replace("OR", "or").replace("NOT", "not")
+        # Replace placeholders A, B, and C with their truth values
+        expression = expression.replace("A", str(A)).replace("B", str(B)).replace("C", str(C))
+        result = eval(expression)
+        print(f"Result: {result}")
+    except Exception as e:
+        print(f"Error: {e}")
+
+# Main program
+print("Logical Statements Evaluator")
+print("1. Single Logical Statement")
+print("2. Compound Logical Statements")
+choice = int(input("Choose an option (1 or 2): "))
+
+if choice == 1:
+    single_statement()
+elif choice == 2:
+    compound_statements()
+else:
+    print("Invalid choice. Please restart the program.")
