@@ -1,0 +1,27 @@
+import math
+
+# Function to calculate net force
+def calculate_net_force(forces):
+    sum_x = sum(force["magnitude"] * math.cos(math.radians(force["angle"])) for force in forces)
+    sum_y = sum(force["magnitude"] * math.sin(math.radians(force["angle"])) for force in forces)
+    
+    net_force_magnitude = math.sqrt(sum_x**2 + sum_y**2)
+    net_force_angle = math.degrees(math.atan2(sum_y, sum_x))
+    
+    return net_force_magnitude, net_force_angle
+
+# Input forces
+num_forces = int(input("Enter the number of forces: "))
+forces = []
+
+for i in range(num_forces):
+    magnitude = float(input(f"Enter the magnitude of force {i+1} (N): "))
+    angle = float(input(f"Enter the angle of force {i+1} (degrees): "))
+    forces.append({"magnitude": magnitude, "angle": angle})
+
+# Calculate net force
+net_force_magnitude, net_force_angle = calculate_net_force(forces)
+
+# Display results
+print(f"\nNet Force Magnitude: {net_force_magnitude:.2f} N")
+print(f"Net Force Angle: {net_force_angle:.2f} degrees")
