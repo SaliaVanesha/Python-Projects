@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+from scipy import stats
+
+# Load data manually
+data = {
+    'Movie Title': ["Cinderella", "Monkey Kingdom", "Avengers: Age of Ultron", "Tomorrowland", "Inside Out",
+                    "Ant-Man", "Bridge of Spies", "The Good Dinosaur", "Star Wars Ep. VII", "The Finest Hours",
+                    "Zootopia", "The Jungle Book", "A Beautiful Planet", "Captain America: Civil War",
+                    "Alice Through the Looking Glass", "Finding Dory", "The BFG", "Pete’s Dragon",
+                    "The Light Between Oceans", "Queen of Katwe", "Doctor Strange", "Moana", "Rogue One"],
+    
+    'Rating': [9.3, 9.2, 9.8, 9.0, 9.5, 9.7, 9.0, 8.9, 8.8, 8.8, 8.8, 8.8, 8.8, 8.8, 8.7, 8.7, 8.7, 8.7, 8.6, 8.6, 8.6, 8.6, 8.6],
+    
+    'Run Time (min)': [142, 175, 152, 202, 96, 195, 201, 154, 178, 178, 142, 139, 179, 148, 124, 136, 145, 133, 127, 207, 130, 118, 130],
+    
+    'Total Gross ($)': [201151353, 16432322, 459005868, 93436322, 356461711, 180202163, 72313754, 123087120, 
+                        936662225, 27569558, 341268248, 364001123, 7895708, 408084349, 77042381, 486295561, 
+                        55483770, 76233151, 12545979, 8874389, 232532923, 246082029, 529483936]
+}
+
+df = pd.DataFrame(data)
+
+# Compute descriptive statistics
+desc_stats = df.describe()
+mode_rating = stats.mode(df['Rating'])
