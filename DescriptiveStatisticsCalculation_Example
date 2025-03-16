@@ -24,3 +24,16 @@ df = pd.DataFrame(data)
 # Compute descriptive statistics
 desc_stats = df.describe()
 mode_rating = stats.mode(df['Rating'])
+
+# Standard Deviation
+std_rating = df['Rating'].std()
+std_runtime = df['Run Time (min)'].std()
+std_gross = df['Total Gross ($)'].std()
+
+# Range
+range_rating = df['Rating'].max() - df['Rating'].min()
+range_runtime = df['Run Time (min)'].max() - df['Run Time (min)'].min()
+range_gross = df['Total Gross ($)'].max() - df['Total Gross ($)'].min()
+
+# Quartiles
+quartiles = df.quantile([0.25, 0.5, 0.75])
