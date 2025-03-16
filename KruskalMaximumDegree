@@ -1,0 +1,116 @@
+# Python3 implementation of the approach
+from typing import List
+
+# par and rank will store the parent
+# and rank of particular node
+# in the Union Find Algorithm
+par = []
+rnk = []
+
+# Find function of Union Find Algorithm
+def find(x: int) -> int:
+	
+	global par
+	
+	if (par[x] != x):
+		par[x] = find(par[x])
+		
+	return par[x]
+
+# Union function of Union Find Algorithm
+def Union(u: int, v: int) -> None:
+	
+	global par, rnk
+
+	x = find(u)
+	y = find(v)
+	
+	if (x == y):
+		return
+	if (rnk[x] > rnk[y]):
+		par[y] = x
+	elif (rnk[x] < rnk[y]):
+		par[x] = y
+	else:
+		par[x] = y
+		rnk[y] += 1
+
+# Function to find the required spanning tree
+def findSpanningTree(deg: List[int], n: int, m: int,
+					g: List[List[int]]) -> None:
+						
+	global rnk, par
+
+	# Initialising parent of a node
+	# by itself
+	par = [i for i in range(n + 1)]
+	rnk = [0] * (n + 1)
+
+	# Variable to store the node
+	# with maximum degree
+	max = 1
+
+	# Finding the node with maximum degree
+	for i in range(2, n + 1):
+		if (deg[i] > deg[max]):
+			max = i
+
+	# Union of all edges incident
+	# on vertex with maximum degree
+	for v in g[max]:
+		print("{} {}".format(max, v))
+		Union(max, v)
+
+	# Carrying out normal Kruskal Algorithm
+	for u in range(1, n + 1):
+		for v in g[u]:
+			x = find(u)
+			y = find(v)
+			
+			if (x == y):
+				continue
+			
+			Union(x, y)
+			print("{} {}".format(u, v))
+
+# Driver code
+if __name__ == "__main__":
+
+	# Number of nodes
+	n = 5
+
+	# Number of edges
+	m = 5
+
+	# ArrayList to store the graph
+	g = [[] for _ in range(n + 1)]
+
+	# Array to store the degree
+	# of each node in the graph
+	deg = [0] * (n + 1)
+
+	# Add edges and update degrees
+	g[1].append(2)
+	g[2].append(1)
+	deg[1] += 1
+	deg[2] += 1
+	g[1].append(5)
+	g[5].append(1)
+	deg[1] += 1
+	deg[5] += 1
+	g[2].append(3)
+	g[3].append(2)
+	deg[2] += 1
+	deg[3] += 1
+	g[5].append(3)
+	g[3].append(5)
+	deg[3] += 1
+	deg[5] += 1
+	g[3].append(4)
+	g[4].append(3)
+	deg[3] += 1
+	deg[4] += 1
+
+	findSpanningTree(deg, n, m, g)
+
+# This code is contributed by sanjeev2552
