@@ -1,0 +1,88 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Define the dataset
+data = {
+    "Movie Title": [
+        "Cinderella", "Monkey Kingdom", "Avengers: Age of Ultron", "Tomorrowland", "Inside Out",
+        "Ant-Man", "Bridge of Spies", "The Good Dinosaur", "Star Wars Ep. VII", "The Finest Hours",
+        "Zootopia", "The Jungle Book", "A Beautiful Planet", "Captain America: Civil War",
+        "Alice Through the Looking Glass", "Finding Dory", "The BFG", "Pete’s Dragon",
+        "The Light Between Oceans", "Queen of Katwe", "Doctor Strange", "Moana", "Rogue One"
+    ],
+    
+    "Rating": [9.3, 9.2, 9.8, 9.0, 9.5, 9.7, 9.0, 8.9, 8.8, 8.8, 8.8, 8.8, 8.8, 8.8, 8.7, 8.7, 8.7, 8.7, 8.6, 8.6, 8.6, 8.6, 8.6],
+    
+    "Release Date": pd.to_datetime([
+        "2015-03-13", "2015-04-17", "2015-05-01", "2015-05-22", "2015-06-19",
+        "2015-07-17", "2015-10-16", "2015-11-25", "2015-12-18", "2016-01-29",
+        "2016-03-04", "2016-04-15", "2016-04-29", "2016-05-06", "2016-05-27",
+        "2016-06-17", "2016-07-01", "2016-08-12", "2016-09-02", "2016-09-23",
+        "2016-11-04", "2016-11-23", "2016-12-16"
+    ]),
+    
+    "Genre": [
+        "Drama", "Documentary", "Action", "Adventure", "Adventure", "Action", "Thriller/Suspense", "Adventure",
+        "Adventure", "Thriller/Suspense", "Adventure", "Adventure", "Documentary", "Action", "Adventure",
+        "Adventure", "Adventure", "Adventure", "Drama", "Drama", "Adventure", "Adventure", "Adventure"
+    ],
+
+    "Certificate": [
+        "PG", "G", "PG-13", "PG", "PG", "PG-13", "PG-13", "PG", "PG-13", "PG", "PG", "PG", "G",
+        "PG-13", "PG", "PG", "PG", "PG", "PG-13", "PG", "PG-13", "PG", "PG-13"
+    ],
+
+    "Run Time (min)": [142, 175, 152, 202, 96, 195, 201, 154, 178, 178, 142, 139, 179, 148, 124, 136, 145, 133, 127, 207, 130, 118, 130],
+
+    "Total Gross ($)": [
+        201151353, 16432322, 459005868, 93436322, 356461711, 180202163, 72313754, 123087120,
+        936662225, 27569558, 341268248, 364001123, 7895708, 408084349, 77042381, 486295561,
+        55483770, 76233151, 12545979, 8874389, 232532923, 246082029, 529483936
+    ]
+}
+
+# Convert to a DataFrame
+df = pd.DataFrame(data)
+
+plt.figure(figsize=(8,5))
+sns.histplot(df["Rating"], bins=10, kde=True, color="blue")
+plt.title("Distribution of Movie Ratings")
+plt.xlabel("Rating")
+plt.ylabel("Frequency")
+plt.show()
+
+plt.figure(figsize=(8,5))
+sns.boxplot(y=df["Total Gross ($)"], color="green")
+plt.title("Boxplot of Total Gross Revenue")
+plt.ylabel("Total Gross ($)")
+plt.show()
+
+plt.figure(figsize=(8,5))
+sns.scatterplot(x=df["Rating"], y=df["Total Gross ($)"], color="red")
+plt.title("Movie Rating vs. Total Gross Revenue")
+plt.xlabel("Rating")
+plt.ylabel("Total Gross ($)")
+plt.show()
+
+plt.figure(figsize=(8,5))
+sns.countplot(y=df["Genre"], order=df["Genre"].value_counts().index, palette="coolwarm")
+plt.title("Number of Movies by Genre")
+plt.xlabel("Count")
+plt.ylabel("Genre")
+plt.show()
+
+plt.figure(figsize=(6,6))
+df["Certificate"].value_counts().plot.pie(autopct="%1.1f%%", colors=["lightblue", "lightgreen", "red"])
+plt.title("Movie Certificate Distribution")
+plt.ylabel("")
+plt.show()
+
+plt.figure(figsize=(10,5))
+sns.lineplot(x=df["Release Date"], y=df["Total Gross ($)"], marker="o", color="purple")
+plt.title("Movie Revenue Over Time")
+plt.xlabel("Release Date")
+plt.ylabel("Total Gross ($)")
+plt.xticks(rotation=45)
+plt.show()
+
