@@ -1,0 +1,32 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the cleaned dataset
+df = pd.read_csv("https://cdn.theforage.com/vinternships/companyassets/SKZxezskWgmFjRvj9/BqF6gmrmLunCkdqKM/1692818278455/clean_data_after_eda.csv")
+
+# Quick overview
+df.info()
+df.head()
+
+# Create new feature
+df['offpeak_diff_dec_jan'] = df['dec_offpeak_price'] - df['jan_offpeak_price']
+
+print(df.columns)
+
+sns.histplot(data=df, x='offpeak_diff_dec_jan', hue='churn', kde=True)
+plt.title('Off-Peak Price Difference (Dec - Jan) by Churn')
+plt.xlabel('Price Difference')
+plt.ylabel('Count')
+plt.show()
+
+df['signup_date'] = pd.to_datetime(df['signup_date'])
+df['signup_month'] = df['signup_date'].dt.month
+
+sns.countplot(data=df, x='signup_month', hue='churn')
+plt.title('Churn Count by Signup Month')
+plt.xlabel('Month')
+plt.ylabel('Number of Customers')
+plt.show()
+
+df.to_csv('enhanced_data_with_features.csv', index=False)
