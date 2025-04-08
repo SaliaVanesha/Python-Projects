@@ -1,0 +1,37 @@
+import pandas as pd
+
+client_df = pd.read_csv("client_data (1).csv")
+price_df = pd.read_csv("price_data (1).csv")
+churn_df = pd.read_csv("churn_data.csv")  # (assumed name if not changed)
+
+print(client_df.info())
+print(price_df.info())
+print(churn_df.info())
+
+print(client_df.describe())
+print(price_df.describe())
+print(churn_df.describe())
+
+print(client_df.nunique())
+print(client_df.isnull().sum())
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Histograms for numeric columns
+client_df.hist(figsize=(12, 10))
+plt.suptitle("Histograms of Client Data")
+plt.show()
+
+# Distribution of a specific column
+sns.histplot(client_df['Forecasted_Usage'], kde=True)
+plt.title('Distribution of Forecasted Usage')
+plt.show()
+
+# Bar plot of churn
+sns.countplot(x='Churned', data=churn_df)
+plt.title("Churn Distribution")
+plt.show()
+
+merged_df = client_df.merge(price_df, on='Customer_ID').merge(churn_df, on='Customer_ID')
+
