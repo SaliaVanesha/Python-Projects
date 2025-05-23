@@ -1,0 +1,29 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Data setup
+height = np.linspace(5, 0, 100)  # X-axis (height from 5m to 0m)
+potential_energy = 98 * (height / 5)  # PE decreases linearly
+kinetic_energy = 98 - potential_energy  # KE increases linearly
+total_energy = np.full_like(height, 98)  # Constant total energy
+
+# Plotting
+plt.figure(figsize=(8, 6))
+plt.plot(height, potential_energy, label='Potential Energy (PE)', color='blue')
+plt.plot(height, kinetic_energy, label='Kinetic Energy (KE)', color='red')
+plt.plot(height, total_energy, label='Total Mechanical Energy', color='green', linestyle='--')
+
+# Formatting
+plt.xlabel('Height (m)', fontsize=12)
+plt.ylabel('Energy (J)', fontsize=12)
+plt.title('Energy Conversion in a Falling Object', fontsize=14)
+plt.gca().invert_xaxis()  # Show height decreasing from 5m (left) to 0m (right)
+plt.legend()
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.ylim(0, 105)  # Slightly extend y-axis for clarity
+
+# Annotate the First Law of Thermodynamics
+plt.text(2.5, 90, 'First Law of Thermodynamics:\nTotal Energy Conserved (98 J)', 
+         ha='center', va='center', backgroundcolor='white')
+
+plt.show()
